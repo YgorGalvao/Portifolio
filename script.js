@@ -1,8 +1,12 @@
-// Helpers
+// ================================
+// BLOCO: Helpers (atalhos)
+// ================================
 const $ = (q, el = document) => el.querySelector(q);
 const $$ = (q, el = document) => Array.from(el.querySelectorAll(q));
 
-/* Sticky blur header */
+// ================================
+// BLOCO: Header (efeito blur ao rolar)
+// ================================
 const header = $(".site-header");
 const onScrollHeader = () => {
   if (window.scrollY > 20) header.classList.add("scrolled");
@@ -11,7 +15,9 @@ const onScrollHeader = () => {
 window.addEventListener("scroll", onScrollHeader);
 onScrollHeader();
 
-/* Mobile nav */
+// ================================
+// BLOCO: Menu mobile
+// ================================
 const toggleBtn = $(".nav-toggle");
 const navLinks = $("#navLinks");
 
@@ -27,8 +33,10 @@ $$(".nav-link").forEach((a) => {
   });
 });
 
-/* Active link by section (IntersectionObserver) */
-const sections = ["home", "about", "skills", "projects", "experience", "contact"]
+// ================================
+// BLOCO: Link ativo conforme seção visível
+// ================================
+const sections = ["home", "about", "skills", "projects", "contact"]
   .map((id) => document.getElementById(id))
   .filter(Boolean);
 
@@ -52,7 +60,9 @@ const activeObserver = new IntersectionObserver(
 
 sections.forEach((sec) => activeObserver.observe(sec));
 
-/* Reveal on scroll */
+// ================================
+// BLOCO: Reveal on scroll (animação de entrada)
+// ================================
 const revealEls = $$(".reveal");
 const revealObserver = new IntersectionObserver(
   (entries) => {
@@ -64,7 +74,9 @@ const revealObserver = new IntersectionObserver(
 );
 revealEls.forEach((el) => revealObserver.observe(el));
 
-/* Animate skill bars when visible */
+// ================================
+// BLOCO: Barras de skill animadas
+// ================================
 const bars = $$(".bar span[data-fill]");
 const barObserver = new IntersectionObserver(
   (entries) => {
@@ -79,11 +91,9 @@ const barObserver = new IntersectionObserver(
 );
 bars.forEach((b) => barObserver.observe(b));
 
-/* Footer year */
-const yearEl = $("#year");
-if (yearEl) yearEl.textContent = String(new Date().getFullYear());
-
-/* Contact form (front-only): mailto */
+// ================================
+// BLOCO: Formulário de contato (mailto)
+// ================================
 const form = $("#contactForm");
 form?.addEventListener("submit", (ev) => {
   ev.preventDefault();
@@ -93,8 +103,9 @@ form?.addEventListener("submit", (ev) => {
   const email = String(data.get("email") || "").trim();
   const message = String(data.get("message") || "").trim();
 
-  // Troque para o seu email real:
-  const to = "seuemail@dominio.com";
+  // EDITE AQUI: email que recebe as mensagens
+  const to = "galvaoygor81@gmail.com";
+
   const subject = encodeURIComponent(`Contato do Portfólio - ${name}`);
   const body = encodeURIComponent(
     `Nome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}\n`
